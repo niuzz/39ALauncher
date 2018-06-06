@@ -4,7 +4,9 @@ const Controller = require('egg').Controller;
 
 class UserController extends Controller {
   async login() {
-    this.ctx.body = 111;
+    const { ctx, service } = this;
+    const result = await service.user.login();
+    ctx.helper.success({ ctx, result });
   }
 }
 
