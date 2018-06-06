@@ -7,7 +7,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_nj_39A';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = [ 2 ];
 
   return config;
 };

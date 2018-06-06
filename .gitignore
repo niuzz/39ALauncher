@@ -17,5 +17,4 @@ package-lock.json
 
 /**/.idea
 /**/.vscode
-
-/**/server/config/config.default.js
+config.default.js
