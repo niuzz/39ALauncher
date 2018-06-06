@@ -3,8 +3,8 @@
 const Service = require('egg').Service;
 
 class UserService extends Service {
-  async login() {
-    throw new Error('error111');
+  async login(id) {
+    return await this.app.mysql.get('user', { uid: 24 });
   }
 }
 
