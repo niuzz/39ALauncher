@@ -4,14 +4,26 @@
 ******************************************* -->
 <template>
 	<div class="wrap">
-		<h1>
-			hello
-		</h1>
+		<carousel :imgs='imgs'></carousel>
 	</div>
 </template>
 
 <script type="text/ecmascript-6">
-export default {}
+import carousel from '../components/Carousel'
+export default {
+  data () {
+    return {
+      imgs: [
+        '/static/img/banner0.jpg',
+        '/static/img/banner1.jpg',
+        '/static/img/banner2.jpg'
+      ]
+    }
+  },
+  components: {
+    carousel
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
