@@ -3,15 +3,22 @@
 *  Created On : Fri Jun 08 2018
 ******************************************* -->
 <template>
-	<v-container fluid>
+	<!-- <v-container fluid>
     <carousel :imgs='imgs'></carousel>
     <description></description>
-	</v-container>
+	</v-container> -->
+  <div>
+    <parallax img="/img/orange.jpg" height="400"></parallax>
+    <description></description>
+    <parallax img="/img/orange.jpg" height="400"></parallax>
+    <description></description>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
-import carousel from '../components/Carousel'
+// import carousel from '../components/Carousel'
 import description from '../components//Description'
+import parallax from '../components//Parallax'
 export default {
   data () {
     return {
@@ -23,7 +30,8 @@ export default {
     }
   },
   components: {
-    carousel,
+    parallax,
+    // carousel,
     description
   }
 }
