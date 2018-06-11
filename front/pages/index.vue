@@ -3,25 +3,28 @@
 *  Created On : Fri Jun 08 2018
 ******************************************* -->
 <template>
-	<div class="wrap">
-		<carousel :imgs='imgs'></carousel>
-	</div>
+	<v-container fluid>
+    <carousel :imgs='imgs'></carousel>
+    <description></description>
+	</v-container>
 </template>
 
 <script type="text/ecmascript-6">
 import carousel from '../components/Carousel'
+import description from '../components//Description'
 export default {
   data () {
     return {
       imgs: [
-        '/static/img/banner0.jpg',
-        '/static/img/banner1.jpg',
-        '/static/img/banner2.jpg'
+        '/img/banner0.jpg',
+        '/img/banner1.jpg',
+        '/img/banner2.jpg'
       ]
     }
   },
   components: {
-    carousel
+    carousel,
+    description
   }
 }
 </script>

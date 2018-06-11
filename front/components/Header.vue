@@ -7,7 +7,7 @@
     <v-toolbar app class='orange lighten-1'>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>
-        <img src="../assets/img/logo.png" alt="" style="width: 2em">
+        <img src="/img/logo.png" alt="" style="width: 2em">
       </v-toolbar-title>
       <v-toolbar-title>软联</v-toolbar-title>
       <v-spacer></v-spacer>
