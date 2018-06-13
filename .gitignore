@@ -2,6 +2,7 @@
 
 # dependencies
 /**/node_modules
+/**/h5
 
 # production
 /**/dist
