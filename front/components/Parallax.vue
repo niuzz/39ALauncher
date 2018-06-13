@@ -5,7 +5,12 @@
 <template>
 
 	<v-parallax :src="img" :height="height">
-          <v-layout
+    <v-layout>
+      <v-btn class="mt-5" large>
+        hello world
+      </v-btn>
+    </v-layout>
+          <!-- <v-layout
                   column
                   align-center
                   justify-center
@@ -21,7 +26,7 @@
             >
               开始…………
             </v-btn>
-          </v-layout>
+          </v-layout> -->
   </v-parallax>
 
 </template>
