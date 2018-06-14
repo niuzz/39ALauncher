@@ -19,6 +19,7 @@
 // import carousel from '../components/Carousel'
 import description from '../components//Description'
 import parallax from '../components//Parallax'
+
 export default {
   data () {
     return {
@@ -33,6 +34,7 @@ export default {
     parallax,
     // carousel,
     description
+
   }
 }
 </script>

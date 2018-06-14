@@ -5,16 +5,19 @@
       <nuxt />
     </v-content>
     <v-footer height="auto"></v-footer>
+    <modia :show="false"></modia>
   </v-app>
 </template>
 
 <script>
 import VHeader from '../components/Header'
 import VFooter from '../components/Footer'
+import modia from '../components/Modia'
 export default {
   components: {
     VHeader,
-    VFooter
+    VFooter,
+    modia
   },
   data () {
       return {

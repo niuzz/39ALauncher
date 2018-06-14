@@ -51,13 +51,18 @@
       </v-toolbar-title>
       <v-toolbar-title>软联</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click="menuCLick"></v-toolbar-side-icon>
     </v-toolbar>
 	</div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
+  methods: {
+    menuCLick () {
+      this.$emit('menuClick')
+    }
+  }
 }
 </script>
 

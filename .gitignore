@@ -3,6 +3,7 @@
 # dependencies
 /**/node_modules
 /**/h5
+/**/bak
 
 # production
 /**/dist
