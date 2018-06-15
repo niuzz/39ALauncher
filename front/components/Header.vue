@@ -60,7 +60,8 @@
 export default {
   methods: {
     menuCLick () {
-      this.$emit('menuClick')
+      console.log(111)
+      this.$emit('menu')
     }
   }
 }

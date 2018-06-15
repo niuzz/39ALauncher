@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <v-header></v-header>
+    <v-header v-on:menu="showMenu"></v-header>
     <v-content>
       <nuxt />
     </v-content>
     <v-footer height="auto"></v-footer>
-    <modia :show="false"></modia>
+    <modia :show="menushow" @close="closeMenu"></modia>
   </v-app>
 </template>
 
@@ -21,8 +21,17 @@ export default {
   },
   data () {
       return {
-        title: '联盟'
+        title: '联盟',
+        menushow: false
       }
+  },
+  methods: {
+    showMenu () {
+      this.menushow = true
+    },
+    closeMenu () {
+      this.menushow = false
     }
+  }
 }
 </script>
