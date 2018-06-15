@@ -26,7 +26,7 @@ export default {
 <style lang="stylus" scoped>
 .wrap
   position fixed
-  top 0
+  top 100%
   bottom 0
   left 0
   right 0
@@ -38,10 +38,32 @@ export default {
     display flex
     justify-content flex-end
 .show
-  display block
+  animation fadeIn .5s ease .1s both
 .hide
-  display none
+  animation fadeOut .5s ease .1s both
 .btn
   .icon--right
     margin-left 0
+@keyframes fadeIn {
+  from {
+    top 100%
+    opacity 0
+  }
+  to {
+    top 0
+    opacity 1
+  }
+}
+@keyframes fadeOut {
+  from {
+    top 0
+    opacity 1
+  }
+  to {
+    top 100%
+    opacity 0
+  }
+}
+
+
 </style>
