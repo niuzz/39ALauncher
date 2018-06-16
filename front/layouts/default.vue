@@ -5,7 +5,16 @@
       <nuxt />
     </v-content>
     <v-footer height="auto"></v-footer>
-    <modia :show="menushow" @close="closeMenu"></modia>
+    <modia :show="menushow" @close="closeMenu">
+      <div>
+        <h2 @click="routeTo('/')">home</h2>
+        <h2 @click="routeTo('/media')">media</h2>
+        <h2 @click="routeTo('/package')">package</h2>
+        <h2 @click="routeTo('/case')">case</h2>
+        <h2 @click="routeTo('/info')">userInfo</h2>
+        <h2 @click="routeTo('/about')">about</h2>
+      </div>
+    </modia>
   </v-app>
 </template>
 
@@ -31,6 +40,10 @@ export default {
     },
     closeMenu () {
       this.menushow = false
+    },
+    routeTo (params) {
+      this.menushow = false
+      this.$router.push({path: params})
     }
   }
 }

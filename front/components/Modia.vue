@@ -9,6 +9,9 @@
         <v-icon dark right>block</v-icon>
       </v-btn>
     </div>
+    <div class='content'>
+      <slot></slot>
+    </div>
 	</div>
 </template>
 
@@ -32,11 +35,14 @@ export default {
   right 0
   width 100%
   height 100%
-  background #FFA726
+  background-image: linear-gradient(to bottom , #FFA726, #E65100)
   z-index: 100
   .close-box
     display flex
     justify-content flex-end
+  .content
+    padding 0 20px
+
 .show
   animation fadeIn .5s ease .1s both
 .hide
