@@ -49,7 +49,7 @@
               </g>
         </svg>
       </v-toolbar-title>
-      <v-toolbar-title>软联</v-toolbar-title>
+      <v-toolbar-title>美橙软联</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon @click="menuCLick"></v-toolbar-side-icon>
     </v-toolbar>
@@ -60,7 +60,6 @@
 export default {
   methods: {
     menuCLick () {
-      console.log(111)
       this.$emit('menu')
     }
   }

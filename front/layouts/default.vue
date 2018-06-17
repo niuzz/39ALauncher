@@ -6,13 +6,13 @@
     </v-content>
     <v-footer height="auto"></v-footer>
     <modia :show="menushow" @close="closeMenu">
-      <div>
+      <div class="menu">
         <h2 @click="routeTo('/')">home</h2>
-        <h2 @click="routeTo('/media')">media</h2>
-        <h2 @click="routeTo('/package')">package</h2>
-        <h2 @click="routeTo('/case')">case</h2>
-        <h2 @click="routeTo('/info')">userInfo</h2>
-        <h2 @click="routeTo('/about')">about</h2>
+        <h2 @click="routeTo('/user/media')">media</h2>
+        <h2 @click="routeTo('/user/package')">package</h2>
+        <h2 @click="routeTo('/user/case')">case</h2>
+        <h2 @click="routeTo('/user/info')">userInfo</h2>
+        <h2 @click="routeTo('/user/about')">about</h2>
       </div>
     </modia>
   </v-app>
@@ -48,3 +48,13 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.menu
+  h2
+    cursor pointer
+    &:hover
+      color #fff
+      text-decoration underline
+</style>
+

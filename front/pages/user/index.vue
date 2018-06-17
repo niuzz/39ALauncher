@@ -1,15 +1,18 @@
 <!-- ******************************************
 *  Author : niuzz niuzz@hotmail.com
-*  Created On : Sat Jun 16 2018
+*  Created On : Fri Jun 08 2018
 ******************************************* -->
 <template>
-	<div class="wrap">
 
-	</div>
 </template>
 
 <script type="text/ecmascript-6">
-export default {}
+
+export default {
+  created () {
+    this.$router.push({path: '/'})
+  }
+}
 </script>
 
 <style lang="stylus" scoped>
