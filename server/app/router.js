@@ -9,4 +9,5 @@ module.exports = app => {
   router.post('/api/user/login', controller.user.login);
   router.get('/api/user/verification', controller.user.verification);
   router.post('/api/user/admin', app.jwt, controller.user.admin);
+  router.post('/api/source/file', controller.source.upload);
 };
