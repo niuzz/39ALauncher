@@ -13,7 +13,7 @@
 
 <script type="text/ecmascript-6">
 import UB from '../../../components/UploadBtn'
-import axios from 'axios'
+import { uploadFile } from '../../../api/source'
 export default {
   components: {
     UB
@@ -23,7 +23,7 @@ export default {
       let data = new FormData()
       data.append('name', file.name)
       data.append('file', file)
-      axios.post('http://localhost:7001/api/source/file', data)
+      uploadFile(data)
       .then(data => {
         console.log('-----------------------')
         console.log(data)
