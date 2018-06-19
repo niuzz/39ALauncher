@@ -7,8 +7,13 @@
     <v-container fluid fill-height class="loginOverlay">
           <v-layout flex align-center justify-center>
             <v-flex xs12 sm8 elevation-6>
-              <v-toolbar class="pt-5 orange darken-4">
-                <v-toolbar-title class="white--text"><h4>欢迎登录 Orange.Media 美橙软联</h4></v-toolbar-title>
+              <v-toolbar class="pt-5 orange light-1">
+                <v-toolbar-title class="white--black">
+                  <h4>
+                  欢迎登录 Orange.Media
+                  美橙软联
+                  </h4>
+                </v-toolbar-title>
               </v-toolbar>
               <v-card>
                 <v-card-text class="pt-4">
@@ -39,6 +44,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {login} from '../../../api/user'
+import crypto from 'crypto'
 export default {
   data () {
     return {
@@ -50,9 +57,17 @@ export default {
   },
   methods: {
     submit () {
-      console.log('-----------------------')
-      console.log(this.loginForm.username)
-      console.log('-----------------------')
+      let params = {}
+      params.username = this.loginForm.username
+      let md5 = crypto.createHash('md5')
+      md5.update(this.loginForm.password)
+      let password = md5.digest('hex')
+      params.password = password
+      login(params).then(data => {
+        let code = data.data.code
+        if (code === 200) {
+        }
+      })
     }
   }
 }

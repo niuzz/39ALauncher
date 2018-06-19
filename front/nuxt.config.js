@@ -19,10 +19,17 @@ module.exports = {
   css: [
     '~/assets/style/app.styl'
   ],
+  router: {
+    middleware: 'auth'
+  },
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: {
+    color: '#3B8070',
+    height: '4px',
+    failedColor: 'red'
+  },
   /*
   ** Build configuration
   */
