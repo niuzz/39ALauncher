@@ -19,6 +19,7 @@ class UserController extends Controller {
       const resdata = {
         token,
       };
+      ctx.cookies.set('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: false, overwrite: true, signed: false });
       ctx.helper.success({ ctx, result: resdata });
     } else {
       ctx.helper.nodata({ ctx, msg: '用户名或密码错' });

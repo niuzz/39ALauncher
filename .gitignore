@@ -5,6 +5,8 @@
 /**/h5
 /**/bak
 /**/upload
+/**/run/*.json
+/**/logs
 
 # production
 /**/dist
