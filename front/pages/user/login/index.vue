@@ -31,7 +31,7 @@
                         ></v-text-field>
                         <v-layout justify-space-between>
                             <v-btn @click="submit" class=" orange darken-1 white--text">Login</v-btn>
-                            <a href="">忘记密码</a>
+                            <v-btn @click="testToken">忘记密码</v-btn>
                         </v-layout>
                       </v-form>
                   </div>
@@ -45,6 +45,8 @@
 
 <script type="text/ecmascript-6">
 import {login} from '../../../api/user'
+import { getCookie } from '../../../utils/util'
+import axios from 'axios'
 import crypto from 'crypto'
 export default {
   data () {
@@ -67,6 +69,23 @@ export default {
         let code = data.data.code
         if (code === 200) {
         }
+      })
+    },
+    testToken () {
+      let params = {}
+      params.username = this.loginForm.username
+      let md5 = crypto.createHash('md5')
+      md5.update(this.loginForm.password)
+      let password = md5.digest('hex')
+      params.password = password
+      let token = getCookie('token')
+      axios({
+        method: 'post',
+        url: 'http://localhost:7001/api/user/login',
+        data: params,
+        headers: {
+              'Authorization': 'Bearer ' + token
+          }
       })
     }
   }

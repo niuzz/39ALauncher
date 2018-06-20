@@ -6,7 +6,9 @@ import axios from 'axios'
 const service = axios.create({
   baseURL: 'http://localhost:7001/api/', // baseUrl
   timeout: 5000, // 超时时间
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json'
+   },
   withCredentials: true
 })
 

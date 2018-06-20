@@ -9,13 +9,10 @@ class UserController extends Controller {
     const password = ctx.request.body.password;
     const result = await service.user.login(username, password);
     if (result) {
-      const token = this.app.jwt.sign({
+      const token = this.service.auth.createToken({
         username: result.username,
         uid: result.uid,
-      }, this.app.config.jwt.secret, {
-        expiresIn: '1days',
       });
-
       const resdata = {
         token,
       };
