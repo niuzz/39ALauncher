@@ -8,6 +8,6 @@ module.exports = app => {
   router.get('/', controller.home.index);
   router.post('/api/user/login', controller.user.login);
   router.get('/api/user/verification', controller.user.verification);
-  router.post('/api/user/admin', app.jwt, controller.user.admin);
+  router.post('/api/user/auth', app.jwt, controller.user.auth);
   router.post('/api/source/file', controller.source.upload);
 };

@@ -81,7 +81,7 @@ export default {
       let token = getCookie('token')
       axios({
         method: 'post',
-        url: 'http://localhost:7001/api/user/login',
+        url: 'http://localhost:7001/api/user/auth',
         data: params,
         headers: {
               'Authorization': 'Bearer ' + token

@@ -13,12 +13,12 @@ exports.getAccessToken = ctx => {
 // 校验 Token
 exports.verifyToken = async (ctx, userId) => {
   const token = this.getAccessToken(ctx);
-  const verifyResult = await ctx.service.user.verifyToken(token);
+  const verifyResult = await ctx.service.auth.verifyToken(token);
   if (!verifyResult.verify) {
     ctx.helper.error(ctx, 401, verifyResult.message);
     return false;
   }
-  if (userId !== verifyResult.message.id) {
+  if (userId !== verifyResult.message.uid) {
     ctx.helper.error(ctx, 401, '用户 ID 与 Token 不一致');
     return false;
   }

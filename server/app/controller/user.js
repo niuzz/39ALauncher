@@ -22,8 +22,10 @@ class UserController extends Controller {
       ctx.helper.nodata({ ctx, msg: '用户名或密码错' });
     }
   }
-  async admin() {
-    console.log(222);
+  async auth() {
+    const { ctx } = this;
+    const isVerify = await ctx.helper.verifyToken(ctx, 555);
+    ctx.helper.success({ ctx, result: isVerify });
   }
   async verification() {
     const { ctx, app } = this;
