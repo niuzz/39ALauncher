@@ -14,18 +14,19 @@ class UserController extends Controller {
         uid: result.uid,
       });
       const resdata = {
+        username: result.username,
+        uid: result.uid,
         token,
       };
       ctx.cookies.set('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: false, overwrite: true, signed: false });
-      ctx.helper.success({ ctx, result: resdata });
+      ctx.helper.success(ctx, resdata);
     } else {
-      ctx.helper.nodata({ ctx, msg: '用户名或密码错' });
+      ctx.helper.nodata(ctx, null, '用户名或密码错');
     }
   }
   async auth() {
     const { ctx } = this;
-    const isVerify = await ctx.helper.verifyToken(ctx, 555);
-    ctx.helper.success({ ctx, result: isVerify });
+    await ctx.helper.verifyToken(ctx, 555);
   }
   async verification() {
     const { ctx, app } = this;
@@ -34,7 +35,6 @@ class UserController extends Controller {
       const data = {};
       data.status = true;
       if (!err) {
-        console.log(decoded);
         data.username = decoded.username;
       } else {
         data.status = false;

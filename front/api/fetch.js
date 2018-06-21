@@ -9,7 +9,7 @@ const service = axios.create({
   headers: {
     'Content-Type': 'application/json'
    },
-  withCredentials: true
+  withCredentials: true // 携带cookie
 })
 
 // 响应拦截

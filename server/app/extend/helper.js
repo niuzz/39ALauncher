@@ -22,30 +22,22 @@ exports.verifyToken = async (ctx, userId) => {
     ctx.helper.error(ctx, 401, '用户 ID 与 Token 不一致');
     return false;
   }
+  ctx.helper.success(ctx, verifyResult);
   return true;
 };
 
-// 处理成功响应
-exports.success = (ctx, result = null, message = '请求成功', status = 200) => {
-  ctx.body = {
-    code: 0,
-    message,
-    data: result,
-  };
-  ctx.status = status;
-};
 
 // 处理失败响应
-exports.error = (ctx, code, message) => {
+exports.error = (ctx, code, msg = '请求失败') => {
   ctx.body = {
     code,
-    message,
+    msg,
   };
   ctx.status = code;
 };
 
 // 处理成功响应
-exports.success = ({ ctx, result = null, msg = '请求成功' }) => {
+exports.success = (ctx, result = null, msg = '请求成功') => {
   ctx.body = {
     code: 200,
     data: result,
@@ -54,7 +46,7 @@ exports.success = ({ ctx, result = null, msg = '请求成功' }) => {
   ctx.status = 200;
 };
 
-exports.nodata = ({ ctx, result = null, msg = '请求失败' }) => {
+exports.nodata = (ctx, result = null, msg = '无相关数据') => {
   ctx.body = {
     code: 400,
     data: result,
