@@ -17,7 +17,6 @@ class Authorization extends Service {
         if (err) {
           result.verify = false;
           result.message = err.message;
-          console.log('------------------------------' + err);
           reject(result);
         } else {
           result.verify = true;

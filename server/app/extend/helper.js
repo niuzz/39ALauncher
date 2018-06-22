@@ -18,7 +18,7 @@ exports.verifyToken = async (ctx, userId) => {
     ctx.helper.error(ctx, 401, verifyResult.message);
     return false;
   }
-  if (userId !== verifyResult.message.uid) {
+  if (userId !== verifyResult.message.id) {
     ctx.helper.error(ctx, 401, '用户 ID 与 Token 不一致');
     return false;
   }
