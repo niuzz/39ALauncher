@@ -100,10 +100,14 @@ export default {
       params.password = password
       login(params).then(data => {
         let code = data.data.code
+        let result = data.data.data
         if (code === 200) {
           this.snackbar.show = true
           this.snackbar.color = 'success'
           this.snackbar.text = '登录成功'
+          this.$store.commit('user/setUser', result.user)
+          sessionStorage.setItem('username', result.user.username)
+          sessionStorage.setItem('id', result.user.id)
           setTimeout(() => {
               this.$router.push({path: '/'})
             }, 3000)

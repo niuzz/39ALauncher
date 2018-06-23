@@ -13,6 +13,7 @@
         <h2 @click="routeTo('/user/case')">case</h2>
         <h2 @click="routeTo('/user/info')">userInfo</h2>
         <h2 @click="routeTo('/user/about')">about</h2>
+        <h2 @click="quit">quit</h2>
       </div>
     </modia>
   </v-app>
@@ -44,6 +45,12 @@ export default {
     routeTo (params) {
       this.menushow = false
       this.$router.push({path: params})
+    },
+    quit () {
+      sessionStorage.setItem('username', '')
+      sessionStorage.setItem('id', '')
+      this.$store.commit('user/setUser', {username: '', id: ''})
+      this.menushow = false
     }
   }
 }

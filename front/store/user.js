@@ -1,10 +1,12 @@
 export const state = () => ({
-  usernmae: '',
+  username: '',
+  id: '',
   token: ''
 })
 
 export const mutations = {
-  setUsername (state, username) {
-    state.username = username
+  setUser (state, user) {
+    state.username = user.username
+    state.id = user.id
   }
 }

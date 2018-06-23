@@ -30,14 +30,15 @@ class UserController extends Controller {
     if (result) {
       const token = this.service.auth.createToken({
         username: result.username,
-        uid: result.uid,
+        id: result.id,
       });
       const resdata = {
-        username: result.username,
-        uid: result.uid,
+        user: {
+          username: result.username,
+          id: result.id,
+        },
         token,
       };
-      ctx.cookies.set('username', result.username, { maxAge: 24 * 60 * 60 * 1000, httpOnly: false, overwrite: true, signed: false });
       ctx.cookies.set('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: false, overwrite: true, signed: false });
       ctx.helper.success(ctx, resdata);
     } else {

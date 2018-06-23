@@ -51,6 +51,15 @@
       </v-toolbar-title>
       <v-toolbar-title>美橙软联</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-flex>
+        <div class='link-wrap' v-if="!this.$store.state.user.username">
+          <a href="/user/login">登录 / </a>
+          <a href="/user/register">注册</a>
+        </div>
+        <div class='link-wrap' v-if="this.$store.state.user.username">
+          <span>欢迎您: {{ this.$store.state.user.username }}</span>
+        </div>
+      </v-flex>
       <v-toolbar-side-icon @click="menuCLick"></v-toolbar-side-icon>
     </v-toolbar>
 	</div>
@@ -58,6 +67,14 @@
 
 <script type="text/ecmascript-6">
 export default {
+  mounted () {
+    let username = sessionStorage.getItem('username')
+    let id = sessionStorage.getItem('id')
+    const user = {username, id}
+    if (username) {
+      this.$store.commit('user/setUser', user)
+    }
+  },
   methods: {
     menuCLick () {
       this.$emit('menu')
@@ -69,4 +86,9 @@ export default {
 <style lang="stylus" scoped>
 .logo
   margin-left:20px
+.link-wrap
+  text-align right
+  a
+    color #333
+    text-decoration none
 </style>
