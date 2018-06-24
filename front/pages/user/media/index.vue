@@ -108,6 +108,8 @@ export default {
       return Math.ceil(this.tableData.length / 2)
     }
   },
+  created () {
+  },
   methods: {
     del (num) {
       console.log(num)

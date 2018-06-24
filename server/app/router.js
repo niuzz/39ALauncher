@@ -6,9 +6,18 @@
 module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
+  /**
+   * 用户类
+   */
   router.post('/api/user/login', controller.user.login);
   router.post('/api/user/register', controller.user.register);
+  /**
+   * 媒体类
+   */
+  router.get('/api/media/categoryType', controller.media.getCategoryType);
+  router.get('/api/media/category', controller.media.getCategory);
   router.get('/api/media', controller.media.getMedia);
+  router.get('/api/media/allInfo', controller.media.getAllMediaInfo);
 
 
   router.get('/api/user/verification', controller.user.verification);

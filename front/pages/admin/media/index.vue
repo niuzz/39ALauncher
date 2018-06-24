@@ -76,53 +76,20 @@
         </div>
       </v-flex>
     </v-layout>
-    <v-layout>
-
-    </v-layout>
   </section>
   <v-dialog v-model="dialog" persistent max-width="80%">
       <v-card>
         <v-card-title>
-          <span class="headline">User Profile</span>
+          <span class="headline">添加媒体</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Legal first name" required></v-text-field>
+                <v-select :items="['a', 'b']" label="选择分类" v-model="form.category"></v-select>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Legal middle name" hint="example of helper text only on focus"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field
-                  label="Legal last name"
-                  hint="example of persistent helper text"
-                  persistent-hint
-                  required
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Email" required></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Password" type="password" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6>
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age"
-                  required
-                ></v-select>
-              </v-flex>
-              <v-flex xs12 sm6>
-                <v-select
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Interests"
-                  multiple
-                  autocomplete
-                  chips
-                ></v-select>
+                <v-text-field label="媒体名称" required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -139,7 +106,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {getMedia} from '../../../api/media'
+import { getMedia, getAllInfo } from '../../../api/media'
 export default {
   data () {
     return {
@@ -218,288 +185,10 @@ export default {
         { text: '操作', value: 'option' }
       ],
       tableData: [
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        },
-        {
-          value: false,
-          name: '凤凰网',
-          category: '新闻综合',
-          channel: '新闻',
-          positon: '网站首页',
-          source: '是',
-          description: '凤凰网是一家老牌的香港媒体，在全球华人圈有广泛的影响力',
-          media_price: 100,
-          direct_price: 200,
-          editor: '王大锤',
-          editor_income: 30,
-          status: 1
-        }
-
-      ]
+      ],
+      form: {
+        category: ''
+      }
     }
   },
   computed: {
@@ -508,8 +197,11 @@ export default {
     }
   },
   created () {
-    getMedia().then(data => {
+    getAllInfo().then(data => {
+      let result = data.data.data
+      this.tableData = result.media
     })
+    getMedia()
   },
   methods: {
     del (num) {
