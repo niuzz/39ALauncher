@@ -6,7 +6,7 @@
 	<div :class="show ? 'wrap show': 'wrap hide'">
     <div class='close-box'>
       <v-btn fab color="red" dark class="text-xs-center" @click="close">
-        <v-icon dark right>block</v-icon>
+        <v-icon dark right>clear</v-icon>
       </v-btn>
     </div>
     <div class='content'>
