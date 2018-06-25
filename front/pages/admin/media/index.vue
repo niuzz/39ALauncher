@@ -85,11 +85,30 @@
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
-              <v-flex xs12 sm6 md4>
-                <v-select :items="categoryType" label="选择分类" v-model="form.category"></v-select>
+              <v-flex xs12 sm6 md2>
+                <v-select :items="categoryType" label="选择大类" v-model="form.categoryType"></v-select>
               </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field label="媒体名称" required></v-text-field>
+              <v-flex xs12 sm6 md2>
+                <v-select :items="category" label="选择分类" v-model="form.category"></v-select>
+              </v-flex>
+              <v-flex xs12 sm6 md2>
+                <v-text-field label="媒体名称" v-model="form.mediaName" required></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md2>
+                <v-text-field label="频道" v-model="form.channel" required></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md2>
+                <v-text-field label="位置" v-model="form.channel" required></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md2>
+                <v-radio-group v-model="form.source">
+                  <v-radio
+                    v-for="n in 3"
+                    :key="n"
+                    :label="`Radio ${n}`"
+                    :value="n"
+                  ></v-radio>
+                </v-radio-group>
               </v-flex>
             </v-layout>
           </v-container>
@@ -191,7 +210,16 @@ export default {
       tableData: [
       ],
       form: {
-        category: ''
+        category: '',
+        categoryType: '',
+        mediaName: '',
+        channel: '',
+        position: '',
+        source: false,
+        media_price: 0,
+        dircet_price: 0,
+        editor: '',
+        editor_income: ''
       }
     }
   },
@@ -208,7 +236,9 @@ export default {
         return item.name
       })
       this.categoryType = c
-      this.category = result.category
+      this.category = result.category.map(item => {
+        return item.name
+      })
       this.tableData = result.media
     })
     getMedia()
