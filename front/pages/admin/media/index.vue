@@ -84,40 +84,52 @@
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex xs12 sm6 md2>
-                <v-select :items="categoryType" label="选择大类" v-model="form.categoryType"></v-select>
-              </v-flex>
-              <v-flex xs12 sm6 md2>
-                <v-select :items="category" label="选择分类" v-model="form.category"></v-select>
-              </v-flex>
-              <v-flex xs12 sm6 md2>
-                <v-text-field label="媒体名称" v-model="form.mediaName" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md2>
-                <v-text-field label="频道" v-model="form.channel" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md2>
-                <v-text-field label="位置" v-model="form.channel" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md2>
-                <v-radio-group v-model="form.source">
-                  <v-radio
-                    v-for="n in 3"
-                    :key="n"
-                    :label="`Radio ${n}`"
-                    :value="n"
-                  ></v-radio>
-                </v-radio-group>
-              </v-flex>
-            </v-layout>
+            <v-form ref="form" v-model="valid">
+              <v-layout wrap>
+                <v-flex xs12 sm6 md2>
+                  <v-select :items="categoryType" label="选择类别" :rules="form.categoryTypeRules" v-model="form.categoryType"></v-select>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-select :items="category" label="选择分类" :rules="form.categoryRules" v-model="form.category"></v-select>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-text-field label="媒体名称" :rules="form.mediaNameRules" v-model="form.mediaName" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-text-field label="频道" v-model="form.channel" :rules="form.channelRules" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-text-field label="位置" v-model="form.channel" :rules="form.positionRules" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-checkbox
+                      label="新闻源"
+                      :rules="form.sourceRules"
+                      v-model="form.source"
+                    ></v-checkbox>
+                </v-flex>
+              </v-layout>
+              <v-layout>
+                <v-flex xs12 sm6 md2>
+                  <v-text-field label="媒介报价" v-model="form.media_price" :rules="form.media_priceRules" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-text-field label="直客报价" v-model="form.dircet_price" :rules="form.dircet_priceRules" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-text-field label="编辑" v-model="form.editor" :rules="form.editorRules" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md2>
+                  <v-text-field label="编辑收入" v-model="form.editor_income" :rules="form.editor_incomeRules" required></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-form>
           </v-container>
-          <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="dialog = false">Save</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="close">Close</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="submit">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -130,6 +142,7 @@ export default {
   data () {
     return {
       dialog: false,
+      valid: true,
       selected: [],
       categoryType: [],
       categoryTypeSelected: [],
@@ -211,15 +224,45 @@ export default {
       ],
       form: {
         category: '',
+        categoryRules: [
+          v => !!v || '请填写媒体分类'
+        ],
         categoryType: '',
+        categoryTypeRules: [
+          v => !!v || '请填写媒体类别'
+        ],
         mediaName: '',
+        mediaNameRules: [
+          v => !!v || '请填写媒体名称'
+        ],
         channel: '',
+        channelRules: [
+          v => !!v || '请填写频道'
+        ],
         position: '',
+        positionRules: [
+          v => !!v || '请选择位置'
+        ],
         source: false,
+        sourceRules: [
+          v => !!v || '新闻源'
+        ],
         media_price: 0,
+        media_priceRules: [
+          v => !!v || '请填写媒体价格'
+        ],
         dircet_price: 0,
+        dircet_priceRules: [
+          v => !!v || '请填写直客价格'
+        ],
         editor: '',
-        editor_income: ''
+        editorRules: [
+          v => !!v || '请填写编辑名'
+        ],
+        editor_income: '',
+        editor_incomeRules: [
+          v => !!v || '请填写编辑收入'
+        ]
       }
     }
   },
@@ -249,6 +292,14 @@ export default {
     },
     openDialog () {
       this.dialog = true
+    },
+    submit () {
+      if (this.$refs.form.validate()) {
+
+      }
+    },
+    close () {
+      this.dialog = false
     }
   }
 }
