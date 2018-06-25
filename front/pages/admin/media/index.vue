@@ -38,7 +38,7 @@
                 </td>
                 <td>{{ props.item.category }}</td>
                 <td>{{ props.item.channel }}</td>
-                <td>{{ props.item.positon }}</td>
+                <td>{{ props.item.position }}</td>
                 <td>{{ props.item.source }}</td>
                 <td>
                   {{ props.item.media_price }}
@@ -86,7 +86,7 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
-                <v-select :items="['a', 'b']" label="选择分类" v-model="form.category"></v-select>
+                <v-select :items="categoryType" label="选择分类" v-model="form.category"></v-select>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-text-field label="媒体名称" required></v-text-field>
@@ -112,6 +112,10 @@ export default {
     return {
       dialog: false,
       selected: [],
+      categoryType: [],
+      categoryTypeSelected: [],
+      category: [],
+      categorySelected: [],
       pagination: {
         page: 1
       },
@@ -121,7 +125,7 @@ export default {
           align: 'left',
           value: 'name',
           sortable: false,
-          width: '200'
+          width: '400'
         },
         {
           text: '分类',
@@ -199,6 +203,12 @@ export default {
   created () {
     getAllInfo().then(data => {
       let result = data.data.data
+      let categoryType = result.categoryType
+      let c = categoryType.map(item => {
+        return item.name
+      })
+      this.categoryType = c
+      this.category = result.category
       this.tableData = result.media
     })
     getMedia()
