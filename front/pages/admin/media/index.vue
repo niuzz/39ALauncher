@@ -137,7 +137,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getMedia, getAllInfo, addMedia } from '../../../api/media'
+import { getMedia, getAllInfo, updateMedia } from '../../../api/media'
 export default {
   data () {
     return {
@@ -296,8 +296,9 @@ export default {
     submit () {
       if (this.$refs.form.validate()) {
         let params = {}
+        params.id = 2
         params.name = this.form.mediaName
-        addMedia(params).then(data => {
+        updateMedia(params).then(data => {
           let code = data.data.code
           console.log(code)
         })

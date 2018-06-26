@@ -30,6 +30,14 @@ export function addMedia (params) {
   })
 }
 
+export function updateMedia (params) {
+  return fetch({
+    url: '/media',
+    method: 'put',
+    data: params
+  })
+}
+
 export function getAllInfo (params) {
   return fetch({
     url: '/media/allInfo',

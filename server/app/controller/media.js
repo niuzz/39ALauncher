@@ -37,6 +37,13 @@ class MediaController extends Controller {
     ctx.helper.success(ctx, result);
   }
 
+  async updateMedia() {
+    const { ctx } = this;
+    const params = ctx.request.body;
+    const result = await ctx.service.media.updateMedia(params);
+    ctx.helper.success(ctx, result);
+  }
+
   async getAllMediaInfo() {
     const { ctx } = this;
     const media = await ctx.service.media.getMedia();
@@ -45,9 +52,7 @@ class MediaController extends Controller {
     ctx.helper.success(ctx, { categoryType, category, media });
   }
 
-  async updateMedia() {
-    this.ctx.body = 'updateMedia';
-  }
+
 }
 
 module.exports = MediaController;

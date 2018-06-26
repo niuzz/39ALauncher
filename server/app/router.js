@@ -18,6 +18,7 @@ module.exports = app => {
   router.get('/api/media/category', controller.media.getCategory);
   router.get('/api/media', controller.media.getMedia);
   router.post('/api/media', controller.media.addMedia);
+  router.put('/api/media', controller.media.updateMedia);
   router.get('/api/media/allInfo', controller.media.getAllMediaInfo);
 
 
