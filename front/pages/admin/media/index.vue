@@ -137,7 +137,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getMedia, getAllInfo } from '../../../api/media'
+import { getMedia, getAllInfo, addMedia } from '../../../api/media'
 export default {
   data () {
     return {
@@ -245,7 +245,7 @@ export default {
         ],
         source: false,
         sourceRules: [
-          v => !!v || '新闻源'
+          // v => !!v || '新闻源'
         ],
         media_price: 0,
         media_priceRules: [
@@ -295,7 +295,12 @@ export default {
     },
     submit () {
       if (this.$refs.form.validate()) {
-
+        let params = {}
+        params.name = this.form.mediaName
+        addMedia(params).then(data => {
+          let code = data.data.code
+          console.log(code)
+        })
       }
     },
     close () {

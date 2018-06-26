@@ -14,18 +14,26 @@ export function getCategory () {
   })
 }
 
-export function getMedia (parmas) {
+export function getMedia (params) {
   return fetch({
     url: '/media',
     method: 'get',
-    data: parmas
+    data: params
   })
 }
 
-export function getAllInfo (parmas) {
+export function addMedia (params) {
+  return fetch({
+    url: '/media',
+    method: 'post',
+    data: params
+  })
+}
+
+export function getAllInfo (params) {
   return fetch({
     url: '/media/allInfo',
     method: 'get',
-    data: parmas
+    data: params
   })
 }

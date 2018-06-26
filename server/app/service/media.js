@@ -18,6 +18,11 @@ class MediaClass extends Service {
     const { app } = this;
     return await app.mysql.select('media');
   }
+
+  async addMedia(params) {
+    const { app } = this;
+    return await app.mysql.insert('media', params);
+  }
 }
 
 module.exports = MediaClass;

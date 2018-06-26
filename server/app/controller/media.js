@@ -30,6 +30,13 @@ class MediaController extends Controller {
     ctx.helper.success(ctx, media);
   }
 
+  async addMedia() {
+    const { ctx } = this;
+    const params = ctx.request.body;
+    const result = await ctx.service.media.addMedia(params);
+    ctx.helper.success(ctx, result);
+  }
+
   async getAllMediaInfo() {
     const { ctx } = this;
     const media = await ctx.service.media.getMedia();
