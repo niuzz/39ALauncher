@@ -224,6 +224,7 @@ export default {
       tableData: [
       ],
       form: {
+        id: '',
         category: '',
         categoryRules: [
           v => !!v || '请填写媒体分类'
@@ -304,6 +305,7 @@ export default {
       })
     },
     dialogRow (row) {
+      this.form.id = row.id
       this.form.mediaName = row.name
       this.form.channel = row.channel
       this.form.position = row.position
@@ -321,6 +323,7 @@ export default {
       if (this.$refs.form.validate()) {
         let params = {}
         params.name = this.form.mediaName
+        params.id = this.form.id
         if (this.submitType === 'add') {
           addMedia(params).then(data => {
           let code = data.data.code
