@@ -56,7 +56,7 @@
                   {{ props.item.status === 1 ? '正常' : '暂停' }}
                 </td>
                 <td>
-                  <v-btn icon class="mx-0" @click="del (props.item)">
+                  <v-btn icon class="mx-0" @click="edit (props.item)">
                     <v-icon color="teal">edit</v-icon>
                   </v-btn>
                 </td>
@@ -99,7 +99,7 @@
                   <v-text-field label="频道" v-model="form.channel" :rules="form.channelRules" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
-                  <v-text-field label="位置" v-model="form.channel" :rules="form.positionRules" required></v-text-field>
+                  <v-text-field label="位置" v-model="form.position" :rules="form.positionRules" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
                   <v-checkbox
@@ -137,12 +137,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getMedia, getAllInfo, updateMedia } from '../../../api/media'
+import { getMedia, getAllInfo, updateMedia, addMedia } from '../../../api/media'
 export default {
   data () {
     return {
       dialog: false,
       valid: true,
+      submitType: '',
       selected: [],
       categoryType: [],
       categoryTypeSelected: [],
@@ -287,25 +288,55 @@ export default {
     getMedia()
   },
   methods: {
-    del (num) {
-      console.log(num)
+    edit (row) {
+      this.dialogRow(row)
+      this.openDialog()
+      this.submitType = 'update'
+    },
+    editSubmit (row) {
+      let params = {}
+      params.mediaName = this.form.mediaName
+      updateMedia(params).then(data => {
+        let code = data.data.code
+        if (code === 200) {
+
+        }
+      })
+    },
+    dialogRow (row) {
+      this.form.mediaName = row.name
+      this.form.channel = row.channel
+      this.form.position = row.position
+      this.form.media_price = row.media_price
+      this.form.dircet_price = row.direct_price
+      this.form.source = row.source
+      this.form.editor = row.editor
+      this.form.editor_income = row.editor_income
     },
     openDialog () {
       this.dialog = true
+      this.submitType = 'add'
     },
     submit () {
       if (this.$refs.form.validate()) {
         let params = {}
-        params.id = 2
         params.name = this.form.mediaName
-        updateMedia(params).then(data => {
+        if (this.submitType === 'add') {
+          addMedia(params).then(data => {
           let code = data.data.code
           console.log(code)
         })
+        } else {
+          updateMedia(params).then(data => {
+            let code = data.data.code
+            console.log(code)
+          })
+        }
       }
     },
     close () {
       this.dialog = false
+      this.$refs.form.reset()
     }
   }
 }
