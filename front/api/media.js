@@ -38,7 +38,7 @@ export function updateMedia (params) {
   })
 }
 
-export function getAllInfo (params) {
+export function getAllMediaInfo (params) {
   return fetch({
     url: '/media/allInfo',
     method: 'get',

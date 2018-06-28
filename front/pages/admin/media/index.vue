@@ -3,7 +3,7 @@
 *  Created On : Sat Jun 23 2018
 ******************************************* -->
 <template>
-<div>
+<div class="out-wrap">
 	<section>
     <v-layout
       column
@@ -137,7 +137,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getMedia, getAllInfo, updateMedia, addMedia } from '../../../api/media'
+import { getMedia, getAllMediaInfo, updateMedia, addMedia } from '../../../api/media'
 export default {
   data () {
     return {
@@ -147,7 +147,7 @@ export default {
       selected: [],
       categoryType: [],
       categoryTypeSelected: [],
-      category: [],
+      categoryData: [],
       categorySelected: [],
       pagination: {
         page: 1
@@ -271,17 +271,34 @@ export default {
   computed: {
     pages () {
       return Math.ceil(this.tableData.length / 2)
+    },
+    category: {
+      get: function () {
+        let type = this.$store.state.user.categoryTypeList.filter(item => {
+          return item.name === this.form.categoryType
+        })
+        let categoryList = this.$store.state.user.categoryList.filter(item => {
+          return item.type === {...type[0]}.id
+        })
+        return categoryList.map(item => {
+          return item.name
+        })
+      },
+      set: function () {}
     }
+
   },
   created () {
-    getAllInfo().then(data => {
+    getAllMediaInfo().then(data => {
       let result = data.data.data
       let categoryType = result.categoryType
+      this.$store.commit('user/setCategoryTypeList', result.categoryType)
+      this.$store.commit('user/setCategoryList', result.category)
       let c = categoryType.map(item => {
         return item.name
       })
       this.categoryType = c
-      this.category = result.category.map(item => {
+      this.categoryData = result.category.map(item => {
         return item.name
       })
       this.tableData = result.media
@@ -325,6 +342,7 @@ export default {
         params.name = this.form.mediaName
         params.id = this.form.id
         if (this.submitType === 'add') {
+          delete params.id
           addMedia(params).then(data => {
           let code = data.data.code
           console.log(code)
@@ -346,7 +364,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-section
+.out-wrap
   min-height 100%
   background linear-gradient(to right bottom, #eee, #ffb74d)
 </style>
