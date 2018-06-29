@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-header v-on:menu="showMenu"></v-header>
-    <v-content>
+    <v-content class='content'>
       <nuxt />
     </v-content>
     <v-footer height="auto"></v-footer>
@@ -57,6 +57,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.content
+  background linear-gradient(to right bottom, #eee, #ffb74d)
 .menu
   h2
     cursor pointer

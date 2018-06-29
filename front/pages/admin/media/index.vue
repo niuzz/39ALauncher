@@ -93,7 +93,7 @@
                   <v-select :items="category" label="选择分类" :rules="form.categoryRules" v-model="form.category"></v-select>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
-                  <v-text-field label="媒体名称" :rules="form.mediaNameRules" v-model="form.mediaName" required></v-text-field>
+                  <v-text-field label="媒体名称" :rules="form.nameRules" v-model="form.name" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
                   <v-text-field label="频道" v-model="form.channel" :rules="form.channelRules" required></v-text-field>
@@ -233,8 +233,8 @@ export default {
         categoryTypeRules: [
           v => !!v || '请填写媒体类别'
         ],
-        mediaName: '',
-        mediaNameRules: [
+        name: '',
+        nameRules: [
           v => !!v || '请填写媒体名称'
         ],
         channel: '',
@@ -253,8 +253,8 @@ export default {
         media_priceRules: [
           v => !!v || '请填写媒体价格'
         ],
-        dircet_price: 0,
-        dircet_priceRules: [
+        direct_price: 0,
+        direct_priceRules: [
           v => !!v || '请填写直客价格'
         ],
         editor: '',
@@ -336,13 +336,28 @@ export default {
       this.dialog = true
       this.submitType = 'add'
     },
+    dataPreparation () {
+      let params = {}
+      params.id = this.form.id
+      params.name = this.form.name
+      params.category = this.form.category
+      params.channel = this.form.channel
+      params.position = this.form.position
+      params.source = this.form.source ? 1 : 0
+      params.description = 'what'
+      params.media_price = this.form.media_price
+      params.direct_price = this.form.dircet_price
+      params.editor = this.form.editor
+      params.editor_income = this.form.editor_income
+      params.status = this.form.status
+      return params
+    },
     submit () {
       if (this.$refs.form.validate()) {
-        let params = {}
-        params.name = this.form.mediaName
-        params.id = this.form.id
+        let params = this.dataPreparation()
         if (this.submitType === 'add') {
           delete params.id
+          params.status = 1
           addMedia(params).then(data => {
           let code = data.data.code
           console.log(code)
@@ -366,5 +381,4 @@ export default {
 <style lang="stylus" scoped>
 .out-wrap
   min-height 100%
-  background linear-gradient(to right bottom, #eee, #ffb74d)
 </style>
