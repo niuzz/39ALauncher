@@ -322,8 +322,11 @@ export default {
       })
     },
     dialogRow (row) {
+      console.log(row)
+      this.categoryType = row.categoryType
+      this.form.category = row.category
       this.form.id = row.id
-      this.form.mediaName = row.name
+      this.form.name = row.name
       this.form.channel = row.channel
       this.form.position = row.position
       this.form.media_price = row.media_price
