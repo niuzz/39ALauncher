@@ -36,7 +36,7 @@
                     <span>{{ props.item.description }}</span>
                   </v-tooltip>
                 </td>
-                <td>{{ props.item.category }}</td>
+                <td>{{ props.item.category_name }}</td>
                 <td>{{ props.item.channel }}</td>
                 <td>{{ props.item.position }}</td>
                 <td>{{ props.item.source }}</td>
@@ -80,7 +80,7 @@
   <v-dialog v-model="dialog" persistent max-width="80%">
       <v-card>
         <v-card-title>
-          <span class="headline">添加媒体</span>
+          <span class="headline">{{ submitType === 'add'? '添加' : '修改' }}媒体</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>
@@ -90,7 +90,7 @@
                   <v-select :items="categoryType" label="选择类别" :rules="form.categoryTypeRules" v-model="form.categoryType"></v-select>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
-                  <v-select :items="category" label="选择分类" :rules="form.categoryRules" v-model="form.category"></v-select>
+                  <v-select :items="category"  item-text="name" item-value="id" :rules="form.categoryRules" v-model="form.category" @change="categoryChange"></v-select>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
                   <v-text-field label="媒体名称" :rules="form.nameRules" v-model="form.name" required></v-text-field>
@@ -137,7 +137,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getMedia, getAllMediaInfo, updateMedia, addMedia } from '../../../api/media'
+import { getAllMediaInfo, updateMedia, addMedia } from '../../../api/media'
 export default {
   data () {
     return {
@@ -229,6 +229,7 @@ export default {
         categoryRules: [
           v => !!v || '请填写媒体分类'
         ],
+        categoryId: '',
         categoryType: '',
         categoryTypeRules: [
           v => !!v || '请填写媒体类别'
@@ -280,16 +281,17 @@ export default {
         let categoryList = this.$store.state.user.categoryList.filter(item => {
           return item.type === {...type[0]}.id
         })
-        return categoryList.map(item => {
-          return item.name
-        })
+        return categoryList
       },
       set: function () {}
     }
-
   },
   created () {
-    getAllMediaInfo().then(data => {
+    this._getData()
+  },
+  methods: {
+    _getData () {
+      getAllMediaInfo().then(data => {
       let result = data.data.data
       let categoryType = result.categoryType
       this.$store.commit('user/setCategoryTypeList', result.categoryType)
@@ -303,47 +305,42 @@ export default {
       })
       this.tableData = result.media
     })
-    getMedia()
-  },
-  methods: {
+    },
     edit (row) {
-      this.dialogRow(row)
       this.openDialog()
+      this.dialogRow(row)
       this.submitType = 'update'
     },
-    editSubmit (row) {
-      let params = {}
-      params.mediaName = this.form.mediaName
-      updateMedia(params).then(data => {
-        let code = data.data.code
-        if (code === 200) {
-
-        }
-      })
-    },
     dialogRow (row) {
-      console.log(row)
-      this.categoryType = row.categoryType
-      this.form.category = row.category
+      this.form.category = this.$store.state.user.categoryList.filter(item => {
+        return item.id === parseInt(row.category)
+      })[0]
+      this.form.categoryId = this.form.category.id
+      this.form.categoryType = row.category_type_name
       this.form.id = row.id
       this.form.name = row.name
       this.form.channel = row.channel
       this.form.position = row.position
       this.form.media_price = row.media_price
       this.form.dircet_price = row.direct_price
-      this.form.source = row.source
+      console.log(row.source)
+      this.form.source = parseInt(row.source) !== 0
       this.form.editor = row.editor
       this.form.editor_income = row.editor_income
     },
     openDialog () {
+      this.$refs.form.reset()
       this.dialog = true
       this.submitType = 'add'
+    },
+    categoryChange (value) {
+      this.form.categoryId = value
     },
     dataPreparation () {
       let params = {}
       params.id = this.form.id
       params.name = this.form.name
-      params.category = this.form.category
+      params.category = this.form.categoryId
       params.channel = this.form.channel
       params.position = this.form.position
       params.source = this.form.source ? 1 : 0
@@ -363,12 +360,18 @@ export default {
           params.status = 1
           addMedia(params).then(data => {
           let code = data.data.code
-          console.log(code)
+          if (code === 200) {
+            this._getData()
+            this.dialog = false
+          }
         })
         } else {
           updateMedia(params).then(data => {
             let code = data.data.code
-            console.log(code)
+            if (code === 200) {
+              this._getData()
+              this.dialog = false
+            }
           })
         }
       }
