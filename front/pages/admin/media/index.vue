@@ -292,18 +292,18 @@ export default {
   methods: {
     _getData () {
       getAllMediaInfo().then(data => {
-      let result = data.data.data
-      let categoryType = result.categoryType
-      this.$store.commit('user/setCategoryTypeList', result.categoryType)
-      this.$store.commit('user/setCategoryList', result.category)
-      let c = categoryType.map(item => {
-        return item.name
-      })
-      this.categoryType = c
-      this.categoryData = result.category.map(item => {
-        return item.name
-      })
-      this.tableData = result.media
+        let result = data.data.data
+        let categoryType = result.categoryType
+        this.$store.commit('user/setCategoryTypeList', result.categoryType)
+        this.$store.commit('user/setCategoryList', result.category)
+        let c = categoryType.map(item => {
+          return item.name
+        })
+        this.categoryType = c
+        this.categoryData = result.category.map(item => {
+          return item.name
+        })
+        this.tableData = result.media
     })
     },
     edit (row) {
