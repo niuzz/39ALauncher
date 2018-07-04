@@ -12,7 +12,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import UB from '../../../components/UploadBtn'
+import UB from '../../../components/UploadButton'
 import { uploadFile } from '../../../api/source'
 export default {
   components: {

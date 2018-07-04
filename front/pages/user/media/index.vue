@@ -3,7 +3,7 @@
     <v-layout
       column
       wrap
-      class="my-5"
+      class="mt-5"
     >
       <v-flex xs12>
         <v-container >
@@ -67,19 +67,51 @@
     </v-layout>
     <v-layout>
       <v-flex>
-        <div class="text-xs-center pt-2">
+        <div class="text-xs-center my-5">
           <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
         </div>
       </v-flex>
     </v-layout>
+    <v-dialog v-model="dialog" persistent max-width="500px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">发布稿件</span>
+        </v-card-title>
+        <v-card-text>
+          <v-form v-model="valid">
+            <v-text-field
+              v-model="name"
+              :rules="nameRules"
+              :counter="10"
+              label="标题"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="email"
+              :rules="emailRules"
+              label="url上传"
+              required
+            ></v-text-field>
+            <upload-button title="上传文件" :selectedCallback="uploadFile"></upload-button>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="dialog = false">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </section>
 </template>
 
 <script type="text/ecmascript-6">
 import { getAllMediaInfo } from '../../../api/media'
+import UploadButton from '../../../components/UploadButton'
 export default {
   data () {
     return {
+      dialog: false,
       selected: [],
       pagination: {
         page: 1
@@ -154,7 +186,17 @@ export default {
         { text: '操作', value: 'option' }
       ],
       tableData: [
-
+      ],
+      valid: false,
+      name: '',
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => v.length <= 10 || 'Name must be less than 10 characters'
+      ],
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid'
       ]
     }
   },
@@ -162,6 +204,9 @@ export default {
     pages () {
       return Math.ceil(this.tableData.length / 2)
     }
+  },
+  components: {
+    UploadButton
   },
   created () {
     this._getData()
@@ -183,8 +228,14 @@ export default {
         this.tableData = result.media
       })
     },
+    edit (row) {
+      this.dialog = true
+    },
     del (num) {
       console.log(num)
+    },
+    uploadFile (file) {
+      console.log(file)
     }
   }
 }

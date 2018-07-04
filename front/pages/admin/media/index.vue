@@ -10,7 +10,7 @@
     >
       <v-flex xs12>
         <v-container>
-          <v-btn fab dark small color="primary" class='text-xs-center' @click="openDialog">
+          <v-btn fab dark small color="primary" class='text-xs-center mb-4' @click="openDialog">
             <v-icon color="red">add</v-icon>
           </v-btn>
           <v-data-table
@@ -71,7 +71,7 @@
           </v-container>
       </v-flex>
       <v-flex>
-        <div class="text-xs-center pt-2">
+        <div class="text-xs-center my-3">
           <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
         </div>
       </v-flex>
@@ -307,9 +307,10 @@ export default {
     })
     },
     edit (row) {
-      this.openDialog()
-      this.dialogRow(row)
-      this.submitType = 'update'
+      console.log(row)
+      // this.openDialog()
+      // this.dialogRow(row)
+      // this.submitType = 'update'
     },
     dialogRow (row) {
       this.form.category = this.$store.state.user.categoryList.filter(item => {
