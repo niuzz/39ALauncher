@@ -78,17 +78,17 @@
           <span class="headline">发布稿件</span>
         </v-card-title>
         <v-card-text>
-          <v-form v-model="valid">
+          <v-form ref="form" v-model="valid">
             <v-text-field
-              v-model="name"
-              :rules="nameRules"
+              v-model="title"
+              :rules="titleRules"
               :counter="10"
               label="标题"
               required
             ></v-text-field>
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="url"
+              :rules="urlRules"
               label="url上传"
               required
             ></v-text-field>
@@ -97,8 +97,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="dialog = false">Save</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="close">Close</v-btn>
+          <v-btn color="blue darken-1" flat @click.native="submit">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -107,7 +107,9 @@
 
 <script type="text/ecmascript-6">
 import { getAllMediaInfo } from '../../../api/media'
+import { addArticle } from '../../../api/article'
 import UploadButton from '../../../components/UploadButton'
+import { uploadFile } from '../../../api/source'
 export default {
   data () {
     return {
@@ -188,16 +190,16 @@ export default {
       tableData: [
       ],
       valid: false,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
+      title: '',
+      titleRules: [
+        v => !!v || '请输入标题',
         v => v.length <= 10 || 'Name must be less than 10 characters'
       ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid'
-      ]
+      url: '',
+      urlRules: [
+        v => !!v || '请输入url'
+      ],
+      file_url: ''
     }
   },
   computed: {
@@ -235,7 +237,29 @@ export default {
       console.log(num)
     },
     uploadFile (file) {
-      console.log(file)
+      let data = new FormData()
+      data.append('name', file.name)
+      data.append('uid', 77)
+      data.append('file', file)
+      uploadFile(data).then(response => {
+        this.file_url = response.data.url
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    close () {},
+    submit () {
+      if (this.$refs.form.validate()) {
+          const params = {
+            uid: '77',
+            url: this.url,
+            file_url: this.file_url,
+            title: this.title
+          }
+          addArticle(params).then(response => {
+            console.log(response)
+          })
+      }
     }
   }
 }

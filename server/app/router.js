@@ -21,6 +21,7 @@ module.exports = app => {
   router.put('/api/media', controller.media.updateMedia);
   router.get('/api/media/allInfo', controller.media.getAllMediaInfo);
 
+  router.post('/api/article', controller.article.addArticle);
 
   router.get('/api/user/verification', controller.user.verification);
   router.post('/api/user/auth', app.jwt, controller.user.auth);

@@ -11,8 +11,10 @@ class SourceClass extends Controller {
   async upload() {
     const stream = await this.ctx.getFileStream();
     const filename = encodeURIComponent(stream.fields.name);
+    const uid = encodeURIComponent(stream.fields.uid);
+    const urlFileName = uid + '_' + new Date().getTime() + '_' + filename;
     // + path.extname(stream.filename).toLowerCase()
-    const target = path.join(__dirname, '../public/upload', filename);
+    const target = path.join(__dirname, '../public/upload', urlFileName);
     const writeStream = fs.createWriteStream(target);
     try {
       await awaitWriteStream(stream.pipe(writeStream));
@@ -21,7 +23,7 @@ class SourceClass extends Controller {
       throw err;
     }
 
-    this.ctx.body = { url: '/public/upload/' + filename };
+    this.ctx.body = { url: '/public/upload/' + urlFileName };
   }
 }
 
