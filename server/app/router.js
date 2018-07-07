@@ -20,8 +20,11 @@ module.exports = app => {
   router.post('/api/media', controller.media.addMedia);
   router.put('/api/media', controller.media.updateMedia);
   router.get('/api/media/allInfo', controller.media.getAllMediaInfo);
-
+  /**
+   * 稿件类
+   */
   router.post('/api/article', controller.article.addArticle);
+  router.get('/api/article', controller.article.getArticle);
 
   router.get('/api/user/verification', controller.user.verification);
   router.post('/api/user/auth', app.jwt, controller.user.auth);

@@ -11,6 +11,15 @@ class ArticleController extends Controller {
       ctx.helper.success(ctx, result);
     }
   }
+
+  async getArticle() {
+    const { ctx } = this;
+    const query = ctx.query;
+    const result = await ctx.service.article.getArticle(query);
+    if (result) {
+      ctx.helper.success(ctx, result);
+    }
+  }
 }
 
 module.exports = ArticleController;

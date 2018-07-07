@@ -7,6 +7,13 @@ class ArticleService extends Service {
     const { app } = this;
     return await app.mysql.insert('article', params);
   }
+
+  async getArticle(params) {
+    const { app } = this;
+    return await app.mysql.select('article', {
+      where: params,
+    });
+  }
 }
 
 module.exports = ArticleService;

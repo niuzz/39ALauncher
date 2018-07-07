@@ -7,3 +7,11 @@ export function addArticle (params) {
     data: params
   })
 }
+
+export function getArticle (params) {
+  return fetch({
+    url: '/article',
+    method: 'get',
+    parmas: params
+  })
+}
