@@ -99,7 +99,7 @@
                   <v-text-field label="频道" v-model="form.channel" :rules="form.channelRules" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
-                  <v-text-field label="位置" v-model="form.position" :rules="form.positionRules" required></v-text-field>
+                  <v-text-field label="发布位置" v-model="form.position" :rules="form.positionRules" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md2>
                   <v-checkbox
