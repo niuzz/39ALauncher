@@ -48,10 +48,9 @@ export default {
   computed: {},
 
   mounted () {
-    getArticle({uid: 77}).then(response => {
+    getArticle({uid: 2}).then(response => {
       let code = response.data.code
       if (code === 200) {
-        console.log(response.data.data)
         this.tableData = response.data.data
       }
     })
