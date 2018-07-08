@@ -12,6 +12,13 @@ class ArticleService extends Service {
     const { app } = this;
     return await app.mysql.select('article', {
       where: params,
+      columns: [ 'a.title', 'u.username' ],
+      joins: ([{
+        as: 'u',
+        join: 'inner',
+        table: 'user',
+        on: [ 'a.uid', 'u.id' ],
+      }]),
     });
   }
 }
