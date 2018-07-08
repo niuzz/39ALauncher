@@ -5,6 +5,7 @@ const Service = require('egg').Service;
 class ArticleService extends Service {
   async addArticle(params) {
     const { app } = this;
+    params.createAt = new Date();
     return await app.mysql.insert('article', params);
   }
 

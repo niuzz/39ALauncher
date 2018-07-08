@@ -13,6 +13,7 @@
            <template slot="items" slot-scope="props">
              <tr>
                <td>{{ props.item.title }}</td>
+               <td>{{ props.item.username}}</td>
              </tr>
            </template>
         </v-data-table>
@@ -35,9 +36,14 @@ export default {
         {
           text: '标题',
           align: 'left',
-          value: 'name',
-          sortable: false,
-          width: '400'
+          value: 'title',
+          sortable: false
+        },
+        {
+          text: '用户',
+          align: 'left',
+          value: 'username',
+          sortable: false
         }
       ]
     }

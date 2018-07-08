@@ -12,6 +12,11 @@ module.exports = app => {
   router.post('/api/user/login', controller.user.login);
   router.post('/api/user/register', controller.user.register);
   /**
+   * 审核员
+   */
+  router.post('/api/admin/create', controller.admin.create);
+  router.post('/api/admin/login', controller.admin.login);
+  /**
    * 媒体类
    */
   router.get('/api/media/categoryType', controller.media.getCategoryType);
