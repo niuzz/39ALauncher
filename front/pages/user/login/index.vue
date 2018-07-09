@@ -121,9 +121,9 @@ export default {
     testToken () {
       let params = {}
       params.username = this.loginForm.username
-      let md5 = crypto.createHash('md5')
-      md5.update(this.loginForm.password)
-      let password = md5.digest('hex')
+      let sha1 = crypto.createHash('sha1')
+      sha1.update(this.loginForm.password)
+      let password = sha1.digest('hex')
       params.password = password
       let token = getCookie('token')
       axios({
