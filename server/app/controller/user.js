@@ -29,12 +29,12 @@ class UserController extends Controller {
     const result = await service.user.login(mobile, password);
     if (result) {
       const token = this.service.auth.createToken({
-        username: result.username,
+        name: result.name,
         id: result.id,
       });
       const resdata = {
         user: {
-          username: result.username,
+          name: result.name,
           id: result.id,
         },
         token,
@@ -48,7 +48,7 @@ class UserController extends Controller {
 
   async auth() {
     const { ctx } = this;
-    let id = parseInt(ctx.request.body.id);
+    const id = parseInt(ctx.request.body.id);
     await ctx.helper.verifyToken(ctx, id);
   }
 

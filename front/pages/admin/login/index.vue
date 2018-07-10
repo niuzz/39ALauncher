@@ -90,10 +90,13 @@ export default {
       }
     }
   },
+  mounted () {
+    sessionStorage.clear()
+  },
   methods: {
     submit () {
       let params = {}
-      params.username = this.loginForm.username
+      params.name = this.loginForm.username
       let sha1 = crypto.createHash('sha1')
       sha1.update(this.loginForm.password)
       let password = sha1.digest('hex')
@@ -105,13 +108,13 @@ export default {
           this.snackbar.show = true
           this.snackbar.color = 'success'
           this.snackbar.text = '登录成功'
-          console.log(result)
-          // this.$store.commit('admin/setUser', result.user)
-          // sessionStorage.setItem('username', result.user.username)
-          // sessionStorage.setItem('id', result.user.id)
-          setTimeout(() => {
-              this.$router.push({path: '/admin/media'})
-            }, 3000)
+          this.$store.commit('admin/setAdmin', result)
+          sessionStorage.setItem('name', result.name)
+          sessionStorage.setItem('id', result.id)
+
+          // setTimeout(() => {
+          //     this.$router.push({path: '/admin/media'})
+          //   }, 3000)
         } else {
           this.snackbar.show = true
           this.snackbar.color = 'error'

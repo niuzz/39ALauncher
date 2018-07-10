@@ -52,12 +52,12 @@
       <v-toolbar-title>美橙软联</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-flex>
-        <div class='link-wrap' v-if="!this.$store.state.user.username">
+        <div class='link-wrap' v-if="!this.$store.state.user.name">
           <a href="/user/login">登录 / </a>
           <a href="/user/register">注册</a>
         </div>
-        <div class='link-wrap' v-if="this.$store.state.user.username">
-          <span>欢迎您: {{ this.$store.state.user.username }}</span>
+        <div class='link-wrap' v-if="this.$store.state.user.name">
+          <span>欢迎您: {{ this.$store.state.user.name }}</span>
         </div>
       </v-flex>
       <v-toolbar-side-icon @click="menuCLick"></v-toolbar-side-icon>
@@ -68,10 +68,10 @@
 <script type="text/ecmascript-6">
 export default {
   mounted () {
-    let username = sessionStorage.getItem('username')
+    let name = sessionStorage.getItem('name')
     let id = sessionStorage.getItem('id')
-    const user = {username, id}
-    if (username) {
+    const user = {name, id}
+    if (name) {
       this.$store.commit('user/setUser', user)
     }
   },

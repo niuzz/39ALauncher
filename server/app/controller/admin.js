@@ -7,7 +7,11 @@ class Admin extends Controller {
     const { ctx } = this;
     const params = ctx.request.body;
     const result = await ctx.service.admin.login(params);
-    ctx.helper.success(ctx, result);
+    if (result) {
+      ctx.helper.success(ctx, result);
+    } else {
+      ctx.helper.nodata(ctx, result);
+    }
   }
 
   async create() {

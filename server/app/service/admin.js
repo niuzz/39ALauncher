@@ -6,7 +6,6 @@ class AdminService extends Service {
   async login(params) {
     const { app } = this;
     const result = await app.mysql.get('admin', params);
-    result ? result : null;
     return result;
   }
 

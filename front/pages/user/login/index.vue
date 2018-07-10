@@ -90,6 +90,9 @@ export default {
       }
     }
   },
+  mounted () {
+    sessionStorage.clear()
+  },
   methods: {
     submit () {
       let params = {}
@@ -106,7 +109,7 @@ export default {
           this.snackbar.color = 'success'
           this.snackbar.text = '登录成功'
           this.$store.commit('user/setUser', result.user)
-          sessionStorage.setItem('username', result.user.username)
+          sessionStorage.setItem('name', result.user.name)
           sessionStorage.setItem('id', result.user.id)
           setTimeout(() => {
               this.$router.push({path: '/'})
@@ -121,7 +124,6 @@ export default {
     testToken () {
       let params = {}
       params.id = sessionStorage.getItem('id')
-      params.id = 2
       let token = getCookie('token')
       axios({
         method: 'post',
@@ -133,7 +135,7 @@ export default {
       }).then(data => {
         console.log(data)
       }).catch(error => {
-        alert(error)
+        console.log(error)
       })
     }
   }

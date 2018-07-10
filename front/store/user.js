@@ -1,5 +1,5 @@
 export const state = () => ({
-  username: '',
+  name: '',
   id: '',
   token: '',
   categoryTypeList: [],
@@ -8,7 +8,7 @@ export const state = () => ({
 
 export const mutations = {
   setUser (state, user) {
-    state.username = user.username
+    state.name = user.name
     state.id = user.id
   },
 

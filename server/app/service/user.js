@@ -4,7 +4,8 @@ const Service = require('egg').Service;
 
 class UserService extends Service {
   async login(mobile, password) {
-    return await this.app.mysql.get('user', { mobile, password });
+    const result = await this.app.mysql.get('user', { mobile, password });
+    return result;
   }
 
   async create(username, password, mobile, createAt) {
