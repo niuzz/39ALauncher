@@ -48,7 +48,8 @@ class UserController extends Controller {
 
   async auth() {
     const { ctx } = this;
-    await ctx.helper.verifyToken(ctx, 555);
+    let id = parseInt(ctx.request.body.id);
+    await ctx.helper.verifyToken(ctx, id);
   }
 
   async verification() {

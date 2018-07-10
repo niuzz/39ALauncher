@@ -2,7 +2,6 @@
 
 # dependencies
 /**/node_modules
-/**/h5
 /**/bak
 /**/upload
 /**/run/*.json
@@ -23,3 +22,4 @@ package-lock.json
 /**/.idea
 /**/.vscode
 config.default.js
+server/app/public/

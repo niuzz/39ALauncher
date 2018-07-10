@@ -120,11 +120,8 @@ export default {
     },
     testToken () {
       let params = {}
-      params.username = this.loginForm.username
-      let sha1 = crypto.createHash('sha1')
-      sha1.update(this.loginForm.password)
-      let password = sha1.digest('hex')
-      params.password = password
+      params.id = sessionStorage.getItem('id')
+      params.id = 2
       let token = getCookie('token')
       axios({
         method: 'post',
@@ -133,6 +130,10 @@ export default {
         headers: {
               'Authorization': 'Bearer ' + token
           }
+      }).then(data => {
+        console.log(data)
+      }).catch(error => {
+        alert(error)
       })
     }
   }
