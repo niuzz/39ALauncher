@@ -102,10 +102,12 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <bar />
   </section>
 </template>
 
 <script type="text/ecmascript-6">
+import Bar from './mediaBar'
 import { getAllMediaInfo } from '../../../api/media'
 import { addArticle } from '../../../api/article'
 import UploadButton from '../../../components/UploadButton'
@@ -208,7 +210,8 @@ export default {
     }
   },
   components: {
-    UploadButton
+    UploadButton,
+    Bar
   },
   created () {
     this._getData()
